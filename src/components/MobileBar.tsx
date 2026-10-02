@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HeartIcon, PhoneIcon } from "./Icons";
+import { MailIcon, PhoneIcon } from "./Icons";
 import { site } from "@/lib/site";
 
 /** Mobilde ekranın altına sabitlenen hızlı eylem çubuğu. */
@@ -15,10 +15,17 @@ export function MobileBar() {
           <PhoneIcon className="h-5 w-5" />
         </a>
         <Link
-          href="/bagis"
+          href="/gonullu-ol"
           className="inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full bg-clay-600 text-[15px] font-semibold text-white shadow-glow"
         >
-          <HeartIcon className="h-5 w-5" /> Bağış Yap
+          Gönüllü Ol
+        </Link>
+        <Link
+          href="/iletisim"
+          className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-ink-200 text-ink-800"
+          aria-label="Bize ulaşın"
+        >
+          <MailIcon className="h-5 w-5" />
         </Link>
       </div>
     </div>

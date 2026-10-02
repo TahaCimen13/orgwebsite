@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Field, Input, Select, Textarea } from "./Field";
 import { Button } from "./Button";
@@ -115,7 +116,14 @@ export function ContactForm({
           className="mt-0.5 h-4 w-4 rounded border-sand-400 accent-clay-600"
         />
         <span>
-          Kişisel verilerimin KVKK Aydınlatma Metni kapsamında işlenmesini kabul ediyorum.
+          Kişisel verilerimin{" "}
+          <Link
+            href="/kvkk"
+            className="font-semibold text-clay-700 underline underline-offset-2"
+          >
+            KVKK Aydınlatma Metni
+          </Link>{" "}
+          kapsamında işlenmesini kabul ediyorum.
         </span>
       </label>
 

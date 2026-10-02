@@ -15,8 +15,8 @@ export default function NotFound() {
         <Button href="/" size="lg">
           Ana sayfaya dönün
         </Button>
-        <Button href="/yardim-talepleri" variant="outline" size="lg">
-          Yardım talepleri
+        <Button href="/projelerimiz" variant="outline" size="lg">
+          Projelerimiz
         </Button>
       </div>
       <Link

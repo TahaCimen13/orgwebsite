@@ -5,7 +5,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileBar } from "@/components/MobileBar";
 import { CookieBanner } from "@/components/CookieBanner";
+import { ScrollProgress } from "@/components/Reveal";
 import { site } from "@/lib/site";
+import { siteUrl } from "@/lib/url";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -19,25 +21,28 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const url = siteUrl();
+
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(url),
   title: {
     default: `${site.name} | ${site.tagline}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
   keywords: [
-    "yardım derneği",
-    "bağış",
-    "gönüllü",
-    "çocuklara destek",
-    "yardım talebi",
+    "dernek",
+    "gönüllülük",
     "dayanışma",
+    "genç dayanışması",
+    "sosyal sorumluluk",
+    "fırsat eşitliği",
+    "akran desteği",
   ],
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    url: site.url,
+    url,
     siteName: site.name,
     title: `${site.name} | ${site.tagline}`,
     description: site.description,
@@ -55,6 +60,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr" className={`${inter.variable} ${jakarta.variable}`}>
+      <head>
+        {/* JavaScript kapalıysa animasyonla gizlenen içerik görünür kalmalı. */}
+        <noscript>
+          <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="min-h-screen antialiased">
         <a
           href="#icerik"
@@ -62,6 +73,7 @@ export default function RootLayout({
         >
           İçeriğe geç
         </a>
+        <ScrollProgress />
         <Header />
         <main id="icerik">{children}</main>
         <Footer />
@@ -76,7 +88,7 @@ export default function RootLayout({
               "@type": "NGO",
               name: site.legalName,
               alternateName: site.name,
-              url: site.url,
+              url,
               email: site.email,
               telephone: site.phone,
               address: { "@type": "PostalAddress", streetAddress: site.address, addressCountry: "TR" },

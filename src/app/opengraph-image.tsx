@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/lib/site";
+import { siteDomain } from "@/lib/url";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -51,11 +52,11 @@ export default function OpengraphImage() {
         </div>
 
         <div style={{ marginTop: 34, fontSize: 27, color: "#665e52", maxWidth: 880, lineHeight: 1.5 }}>
-          İhtiyaç sahiplerini gönüllü destekçilerle aracısız buluşturan dayanışma platformu.
+          Genç dayanışmasını güçlendiren, gönüllülüğü herkes için erişilebilir kılan bir dernek.
         </div>
 
         <div style={{ marginTop: 60, fontSize: 22, color: "#a69e91", letterSpacing: 2 }}>
-          {site.domain}
+          {siteDomain()}
         </div>
       </div>
     ),

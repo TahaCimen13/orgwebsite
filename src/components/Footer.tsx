@@ -1,31 +1,31 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { LogoMark } from "./Logo";
-import { ArrowIcon, MailIcon, PhoneIcon, PinIcon, ClockIcon } from "./Icons";
+import { Button } from "./Button";
+import { Reveal } from "./Reveal";
+import { ArrowIcon, MailIcon, PhoneIcon, PinIcon, ClockIcon, ShieldIcon } from "./Icons";
 
 const columns = [
   {
     title: "Kurumsal",
     links: [
       { href: "/hakkimizda", label: "Hakkımızda" },
+      { href: "/projelerimiz", label: "Projelerimiz" },
       { href: "/duyurular", label: "Duyurular" },
-      { href: "/gonulluler", label: "Gönüllüler" },
       { href: "/iletisim", label: "İletişim" },
     ],
   },
   {
-    title: "Destek Ol",
+    title: "Katılın",
     links: [
-      { href: "/bagis", label: "Bağış Yap" },
       { href: "/gonullu-ol", label: "Gönüllü Ol" },
-      { href: "/yardim-talepleri", label: "Yardım Talepleri" },
-      { href: "/yardim-talebi-olustur", label: "Talep Oluştur" },
+      { href: "/projelerimiz", label: "Çalışma Alanları" },
+      { href: "/sikca-sorulan-sorular", label: "Sıkça Sorulan Sorular" },
     ],
   },
   {
     title: "Bilgi",
     links: [
-      { href: "/sikca-sorulan-sorular", label: "Sıkça Sorulan Sorular" },
       { href: "/gizlilik-politikasi", label: "Gizlilik Politikası" },
       { href: "/sartlar-kosullar", label: "Şartlar ve Koşullar" },
       { href: "/kvkk", label: "KVKK Aydınlatma Metni" },
@@ -36,7 +36,6 @@ const columns = [
 const socials = [
   { label: "Instagram", href: site.social.instagram, short: "in" },
   { label: "X", href: site.social.x, short: "X" },
-  { label: "Facebook", href: site.social.facebook, short: "f" },
   { label: "LinkedIn", href: site.social.linkedin, short: "li" },
 ];
 
@@ -46,41 +45,28 @@ export function Footer() {
   return (
     <footer className="mt-24 bg-ink-950 text-sand-200">
       <div className="container-x">
-        {/* Bülten */}
-        <div className="grid gap-8 border-b border-white/10 py-14 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-5">
-            <h2 className="text-[26px] leading-tight text-white sm:text-[30px]">
-              İyilikten haberdar olun
-            </h2>
-            <p className="mt-3 text-[15px] leading-relaxed text-sand-300/90">
-              Ayda bir e-posta: yeni talepler, kampanyalar ve ulaşan yardımların raporu.
-            </p>
-          </div>
-          <form className="lg:col-span-7 lg:justify-self-end lg:w-full lg:max-w-lg">
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <label htmlFor="newsletter" className="sr-only">
-                E-posta adresiniz
-              </label>
-              <input
-                id="newsletter"
-                type="email"
-                required
-                placeholder="E-posta adresiniz"
-                className="h-13 flex-1 rounded-full border border-white/15 bg-white/10 px-6 text-[15px] text-white placeholder:text-sand-400 focus:border-clay-400 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-clay-600 px-7 text-[15px] font-semibold text-white transition-colors hover:bg-clay-500"
-              >
-                Abone Ol <ArrowIcon className="h-4 w-4" />
-              </button>
+        {/* Katılım çağrısı */}
+        <Reveal>
+          <div className="grid gap-8 border-b border-white/10 py-14 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <h2 className="text-[26px] leading-tight tracking-[-0.02em] text-white sm:text-[32px]">
+                Dayanışmayı birlikte büyütelim
+              </h2>
+              <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-sand-300/90">
+                Çevrenizde gördüğünüz bir sorun için harekete geçmek istiyorsanız, başlamak için
+                bizimle konuşmanız yeterli.
+              </p>
             </div>
-            <p className="mt-3 text-[12.5px] text-sand-400">
-              Kaydolarak <Link href="/kvkk" className="underline underline-offset-2">KVKK metnini</Link> kabul
-              etmiş olursunuz. İstediğiniz zaman çıkabilirsiniz.
-            </p>
-          </form>
-        </div>
+            <div className="flex flex-wrap gap-3 lg:col-span-5 lg:justify-end">
+              <Button href="/gonullu-ol" variant="primary" size="lg">
+                Gönüllü Ol <ArrowIcon className="h-4 w-4" />
+              </Button>
+              <Button href="/iletisim" variant="light" size="lg">
+                Bize Ulaşın
+              </Button>
+            </div>
+          </div>
+        </Reveal>
 
         <div className="grid gap-12 py-16 lg:grid-cols-12">
           <div className="lg:col-span-4">
@@ -96,6 +82,15 @@ export function Footer() {
             <p className="mt-5 max-w-sm text-[14.5px] leading-[1.75] text-sand-300/85">
               {site.description}
             </p>
+
+            <p className="mt-6 flex max-w-sm items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-4 text-[13px] leading-relaxed text-sand-300">
+              <ShieldIcon className="mt-0.5 h-4.5 w-4.5 shrink-0 text-clay-300" />
+              <span>
+                Derneğimiz <strong className="font-semibold text-white">bağış toplamamaktadır</strong>.
+                Adımıza para talep eden hiçbir hesap veya kişiye itibar etmeyin.
+              </span>
+            </p>
+
             <div className="mt-6 flex gap-2.5">
               {socials.map((s) => (
                 <a
@@ -104,7 +99,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={s.label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-[13px] font-semibold text-sand-200 transition-colors hover:border-clay-400 hover:bg-clay-600 hover:text-white"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-[13px] font-semibold text-sand-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-clay-400 hover:bg-clay-600 hover:text-white"
                 >
                   {s.short}
                 </a>
@@ -120,7 +115,7 @@ export function Footer() {
                 </h3>
                 <ul className="mt-5 space-y-3">
                   {col.links.map((l) => (
-                    <li key={l.href}>
+                    <li key={`${col.title}-${l.href}-${l.label}`}>
                       <Link
                         href={l.href}
                         className="text-[14.5px] text-sand-300/85 transition-colors hover:text-white"
@@ -167,7 +162,7 @@ export function Footer() {
           <p>
             © {year} {site.legalName}
           </p>
-          <p>Dernek kayıt no: {site.registryNo} · Örnek amaçlı hazırlanmış şablon</p>
+          <p>Dernek kayıt no: {site.registryNo}</p>
         </div>
       </div>
     </footer>

@@ -1,9 +1,14 @@
+/**
+ * DUYURULAR
+ * Yeni duyuru eklemek için listenin başına bir kayıt ekleyin.
+ * `content` içindeki her satır ayrı bir paragraf olarak basılır.
+ */
 export type Post = {
   slug: string;
   title: string;
   excerpt: string;
   date: string;
-  tag: "Duyuru" | "Etkinlik" | "Farkındalık" | "Kampanya";
+  tag: "Duyuru" | "Etkinlik" | "Farkındalık";
   readingTime: string;
   image: string;
   content: string[];
@@ -11,95 +16,67 @@ export type Post = {
 
 export const posts: Post[] = [
   {
-    slug: "acil-kan-bagisi-cagrisi",
-    image: "/images/tedavi.jpg",
-    title: "Acil kan bağışı çağrısı: 0 Rh (-) aranıyor",
+    slug: "derman-dernegi-kuruldu",
+    image: "/images/hakkimizda.jpg",
+    title: "Derman Derneği kuruldu",
     excerpt:
-      "Tedavisi süren iki çocuğumuz için 0 Rh (-) kan grubuna acil ihtiyacımız var. Bağış yapabilecek gönüllüleri bekliyoruz.",
-    date: "2026-08-25",
+      "Bir lise kulübünde başlayan dayanışma fikri, 2026 yılında resmî bir derneğe dönüştü.",
+    date: "2026-09-01",
     tag: "Duyuru",
     readingTime: "2 dk",
     content: [
-      "Tedavi süreci devam eden iki çocuğumuz için 0 Rh (-) kan grubuna acil ihtiyaç duyuyoruz.",
-      "Bağış yapmak isteyen gönüllülerimizin, iletişim formundan veya telefonla bize ulaşarak randevu oluşturmasını rica ediyoruz. Bağış öncesi son 48 saatte ağır egzersiz yapılmaması ve yeterli sıvı tüketilmesi öneriliyor.",
-      "Her bağış üç hayata dokunuyor. Duyurumuzu paylaşarak da destek olabilirsiniz.",
+      "Derman Derneği, Yeşilköy Anadolu Lisesi Sosyal Sorumluluk ve Yardımlaşma Kulübü üyelerinin bir araya gelmesiyle 2026 yılında kuruldu.",
+      "Kulüp olarak yürüttüğümüz çalışmalarda şunu gördük: yardım etmek isteyen çok insan var, yardıma ihtiyaç duyan çok insan var ve çoğu zaman eksik olan tek şey bu ikisini buluşturan bir yapı. Derneği de tam bu boşluğu doldurmak için kurduk.",
+      "Önümüzdeki dönemde eğitim ve fırsat eşitliği, akran desteği ve farkındalık alanlarında yürüteceğimiz projeleri bu sayfadan duyuracağız. Bize katılmak isteyen herkesi gönüllü başvuru formumuzu doldurmaya davet ediyoruz.",
     ],
   },
   {
-    slug: "erken-teshis-hayat-kurtarir",
-    image: "/images/ilac.jpg",
-    title: "Erken teşhis hayat kurtarır",
+    slug: "akran-destek-atolyeleri-basvurulari",
+    image: "/images/sinif.jpg",
+    title: "Akran Destek Atölyeleri için başvurular açıldı",
     excerpt:
-      "Çocukluk çağı hastalıklarında erken teşhisin önemi ve ailelerin dikkat etmesi gereken belirtiler üzerine bir rehber.",
-    date: "2026-08-18",
-    tag: "Farkındalık",
-    readingTime: "4 dk",
+      "Derslerinde desteğe ihtiyaç duyan ve destek vermek isteyen öğrenciler için haftalık çalışma buluşmaları başlıyor.",
+    date: "2026-09-10",
+    tag: "Duyuru",
+    readingTime: "2 dk",
     content: [
-      "Çocukluk çağında görülen birçok hastalıkta tedavi başarısı, teşhisin ne kadar erken konulduğuyla doğrudan ilişkili.",
-      "Uzun süren ateş, açıklanamayan halsizlik, iştahsızlık, gece terlemeleri ve geçmeyen ağrılar gibi belirtilerin ihmal edilmemesi gerekiyor.",
-      "Düzenli çocuk sağlığı kontrollerini aksatmamak, ailelerin yapabileceği en etkili koruyucu adım. Şüpheli bir durumda vakit kaybetmeden bir uzmana başvurun.",
+      "Akran Destek Atölyeleri, bir konuyu iyi bilen öğrencilerle o konuda desteğe ihtiyaç duyan yaşıtlarını küçük gruplar hâlinde bir araya getiriyor.",
+      "Atölyelere hem destek almak hem destek vermek için başvurabilirsiniz. Konu başlıkları gelen talepler doğrultusunda belirlenecek, böylece buluşmalar gerçekten ihtiyaç duyulan yerde yapılacak.",
+      "Katılım ücretsizdir ve kontenjan sınırlıdır. Başvuru için gönüllü formumuzu doldurmanız yeterli.",
     ],
   },
   {
-    slug: "okula-merhaba-kampanyasi-basladi",
-    image: "/images/kirtasiye.jpg",
-    title: "\"Okula Merhaba\" kampanyası başladı",
+    slug: "gonullu-tanisma-bulusmasi",
+    image: "/images/gonulluler.jpg",
+    title: "İlk gönüllü tanışma buluşmamıza davetlisiniz",
     excerpt:
-      "Yeni eğitim öğretim yılı için 500 çocuğa kırtasiye ve okul kıyafeti ulaştırmayı hedefliyoruz.",
-    date: "2026-08-12",
-    tag: "Kampanya",
+      "Dernek çalışmalarına katılmak isteyen gönüllülerle tanışacağımız açık buluşmanın ayrıntıları.",
+    date: "2026-09-20",
+    tag: "Etkinlik",
+    readingTime: "2 dk",
+    content: [
+      "Dernek olarak ilk gönüllü tanışma buluşmamızı düzenliyoruz. Buluşmada derneğin nasıl kurulduğunu, hangi alanlarda çalışmayı planladığımızı ve gönüllülerin bu çalışmalara nasıl katılabileceğini birlikte konuşacağız.",
+      "Buluşma, daha önce hiç gönüllü çalışması yapmamış olanlar için de uygun. Herhangi bir ön hazırlık ya da deneyim gerekmiyor; merak etmeniz yeterli.",
+      "Katılmak isterseniz gönüllü formundan ya da iletişim sayfamızdan bize ulaşabilirsiniz. Tarih ve yer bilgisini başvuran herkese ayrıca ileteceğiz.",
+    ],
+  },
+  {
+    slug: "dayanisma-neden-surekli-olmali",
+    image: "/images/sosyal.jpg",
+    title: "Dayanışma neden sürekli olmalı?",
+    excerpt:
+      "Yardımlaşmanın belirli günlere sıkışmak yerine günlük hayatın bir parçası hâline gelmesi üzerine kısa bir yazı.",
+    date: "2026-09-25",
+    tag: "Farkındalık",
     readingTime: "3 dk",
     content: [
-      "Her yıl olduğu gibi bu yıl da yeni eğitim öğretim dönemine hazırlanıyoruz. Hedefimiz 500 çocuğa tam donanımlı okul seti ulaştırmak.",
-      "Bir okul seti; çanta, kırtasiye malzemeleri, defter seti ve okul kıyafetinden oluşuyor. Tek bir set ile bir çocuğun tüm yıl ihtiyacını karşılayabilirsiniz.",
-      "Kampanyaya destek olmak için bağış sayfamızı ziyaret edebilir veya kırtasiye desteği kategorisindeki taleplere doğrudan katkı sunabilirsiniz.",
-    ],
-  },
-  {
-    slug: "gonullu-egitim-programi-2026",
-    image: "/images/gonulluler.jpg",
-    title: "2026 Gönüllü Eğitim Programı kayıtları açıldı",
-    excerpt:
-      "Yeni gönüllülerimiz için düzenlediğimiz iki haftalık oryantasyon programının kayıtları başladı.",
-    date: "2026-08-05",
-    tag: "Etkinlik",
-    readingTime: "2 dk",
-    content: [
-      "Gönüllülerimizin sahada daha güçlü destek verebilmesi için iki haftalık bir oryantasyon programı düzenliyoruz.",
-      "Program; hastane ziyaret kuralları, çocukla iletişim, mahremiyet ve kişisel veri güvenliği başlıklarını kapsıyor.",
-      "Katılım ücretsizdir. Kontenjan sınırlıdır; başvuru için gönüllü ol formunu doldurmanız yeterli.",
-    ],
-  },
-  {
-    slug: "seffaflik-raporu-2025",
-    image: "/images/market.jpg",
-    title: "2025 Şeffaflık ve Faaliyet Raporu yayımlandı",
-    excerpt:
-      "Geçtiğimiz yıl toplanan bağışların nereye harcandığını kalem kalem paylaştığımız raporumuz erişime açıldı.",
-    date: "2026-07-22",
-    tag: "Duyuru",
-    readingTime: "5 dk",
-    content: [
-      "2025 yılında toplanan tüm bağışların dağılımını, gider kalemlerini ve ulaşılan kişi sayılarını içeren raporumuz yayımlandı.",
-      "Bağışların %92'si doğrudan ihtiyaç sahiplerine, %8'i operasyonel giderlere aktarıldı.",
-      "Raporun tamamına iletişim adresimizden ulaşabilir, sorularınızı bize iletebilirsiniz.",
-    ],
-  },
-  {
-    slug: "iyilik-bahcesi-atolyesi",
-    image: "/images/sosyal.jpg",
-    title: "İyilik Bahçesi atölyesi: çocuklarla birlikte üretiyoruz",
-    excerpt:
-      "Ayda bir düzenlediğimiz sanat ve doğa atölyesinin bu ayki teması tohumdan fidana.",
-    date: "2026-07-10",
-    tag: "Etkinlik",
-    readingTime: "2 dk",
-    content: [
-      "İyilik Bahçesi atölyelerimizde çocuklar hem üretiyor hem de birlikte vakit geçirmenin iyileştirici gücünü keşfediyor.",
-      "Bu ayki atölyemizde tohum ekimi, saksı boyama ve doğa gözlemi etkinlikleri yer alacak.",
-      "Atölyeye gönüllü olarak katılmak isteyenler gönüllü ol formundan başvurabilir.",
+      "Yardımlaşma çoğu zaman belirli zamanlarda hatırlanan bir şey oluyor: bir bayram, bir afet, bir özel gün. Oysa ihtiyaçlar o günlerle sınırlı değil.",
+      "Sürekli olmayan destek, desteklenen kişi için de öngörülebilir olmuyor. Bir öğrencinin bir dönem boyunca ihtiyaç duyduğu desteğin tek bir haftaya sığdırılması, o desteğin etkisini büyük ölçüde azaltıyor.",
+      "Bizim için dayanışmanın sürekli olması, büyük işler yapmak anlamına gelmiyor. Küçük ama düzenli bir katkının, seyrek ama büyük bir katkıdan daha çok işe yaradığını düşünüyoruz. Gönüllülüğü de bu yüzden herkesin kendi hayatına sığdırabileceği bir şey hâline getirmeye çalışıyoruz.",
     ],
   },
 ];
 
 export const postBySlug = (slug: string) => posts.find((p) => p.slug === slug);
+
+export const postsByDate = () => [...posts].sort((a, b) => b.date.localeCompare(a.date));

@@ -1,51 +1,56 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalContent";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Şartlar ve Koşullar",
-  description: "Platformumuzun kullanım şartları, bağış ve talep süreçlerine ilişkin kurallar.",
+  description: `${site.legalName} web sitesi kullanım şartları.`,
 };
 
 export default function TermsPage() {
   return (
     <LegalPage
-      eyebrow="Yasal"
+      eyebrow="Kullanım"
       title="Şartlar ve Koşullar"
-      description="Bu platformu kullanarak aşağıdaki şartları kabul etmiş sayılırsınız."
-      updatedAt="1 Ağustos 2026"
+      description="Bu web sitesini kullanırken geçerli olan koşullar."
+      updatedAt="1 Ekim 2026"
       sections={[
         {
-          heading: "Genel hükümler",
+          heading: "Genel",
           paragraphs: [
-            "Bu web sitesi, ihtiyaç sahipleri ile gönüllü destekçileri buluşturmak amacıyla işletilmektedir. Site üzerinden yürütülen tüm faaliyetler dernek tüzüğü ve yürürlükteki mevzuata tabidir.",
+            `Bu site ${site.legalName} tarafından, derneğin çalışmalarını tanıtmak ve gönüllü başvurularını almak amacıyla işletilir.`,
+            "Siteyi kullanarak bu sayfadaki koşulları kabul etmiş olursunuz.",
           ],
         },
         {
-          heading: "Yardım talepleri",
+          heading: "Bağış toplanmaması",
           paragraphs: [
-            "Platformda yayımlanan tüm talepler, yayına alınmadan önce sosyal inceleme ekibimizce değerlendirilir ve belgelenir.",
-            "Gerçeğe aykırı beyanda bulunulduğunun tespiti hâlinde talep kaldırılır ve gerekli hâllerde hukuki süreç başlatılır.",
+            "Derneğimiz bağış toplamamaktadır. Bu site üzerinden hiçbir şekilde para talep edilmez; hesap numarası, ödeme bağlantısı veya kampanya yayımlanmaz.",
+            "Dernek adını kullanarak para talep eden kişi, hesap veya web sitelerinin bizimle hiçbir ilgisi yoktur. Böyle bir durumla karşılaşırsanız bize bildirmenizi rica ederiz.",
           ],
         },
         {
-          heading: "Bağışlar",
+          heading: "İçeriğin kullanımı",
           paragraphs: [
-            "Bağışlar, bağışçının belirlediği alana yönlendirilir. Alan belirtilmemişse en acil ihtiyaçlara aktarılır.",
-            "Hedefine ulaşan bir talebe gelen fazla bağış, bağışçı aksini belirtmedikçe aynı kategorideki diğer taleplere aktarılır.",
-            "Yapılan bağışlar kural olarak iade edilmez; sehven yapılan işlemler için bizimle iletişime geçebilirsiniz.",
+            "Sitedeki yazı, görsel ve diğer içerikler derneğe aittir. Kaynak göstermek koşuluyla alıntılanabilir; ticari amaçla kullanılamaz.",
           ],
         },
         {
-          heading: "Gönüllülük",
+          heading: "Formlar ve başvurular",
           paragraphs: [
-            "Gönüllüler, faaliyetleri sırasında öğrendikleri kişisel bilgileri üçüncü kişilerle paylaşmamayı taahhüt eder.",
-            "Gönüllülük ilişkisi bir iş akdi niteliği taşımaz ve karşılıklı olarak her zaman sonlandırılabilir.",
+            "Formlar aracılığıyla ilettiğiniz bilgilerin doğru olmasından siz sorumlusunuz. Gönüllü başvurularının kabulü derneğin değerlendirmesine bağlıdır.",
           ],
         },
         {
           heading: "Sorumluluk sınırı",
           paragraphs: [
-            "Destekçi ile ihtiyaç sahibi arasında platform dışında kurulan doğrudan ilişkilerden doğan sonuçlardan derneğimiz sorumlu tutulamaz.",
+            "Sitedeki bilgiler bilgilendirme amaçlıdır. İçerikte oluşabilecek hata veya eksikliklerden doğan dolaylı zararlardan dernek sorumlu tutulamaz.",
+          ],
+        },
+        {
+          heading: "Değişiklikler",
+          paragraphs: [
+            "Bu koşullar gerektiğinde güncellenebilir. Güncel sürüm her zaman bu sayfada yayımlanır.",
           ],
         },
       ]}

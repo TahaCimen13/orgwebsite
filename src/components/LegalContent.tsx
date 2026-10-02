@@ -17,7 +17,7 @@ export function LegalPage({
 }) {
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} description={description} />
+      <PageHero compact eyebrow={eyebrow} title={title} description={description} />
       <section className="container-x py-14">
         <div className="mx-auto max-w-3xl">
           <p className="inline-flex rounded-full bg-sand-100 px-4 py-1.5 text-[12.5px] font-medium text-ink-500">

@@ -8,7 +8,6 @@ const tagStyles: Record<Post["tag"], string> = {
   Duyuru: "bg-clay-50 text-clay-700",
   Etkinlik: "bg-olive-50 text-olive-700",
   Farkındalık: "bg-sand-200 text-ink-700",
-  Kampanya: "bg-clay-600 text-white",
 };
 
 export function PostCard({ post }: { post: Post }) {

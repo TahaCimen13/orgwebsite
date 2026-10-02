@@ -1,43 +1,41 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/lib/site";
-import { requests } from "@/data/requests";
+import { siteUrl } from "@/lib/url";
+import { projects } from "@/data/projects";
 import { posts } from "@/data/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const base = siteUrl();
   const staticRoutes = [
     "",
     "/hakkimizda",
-    "/yardim-talepleri",
-    "/yardim-talebi-olustur",
-    "/gonulluler",
-    "/gonullu-ol",
+    "/projelerimiz",
     "/duyurular",
-    "/bagis",
+    "/gonullu-ol",
     "/iletisim",
     "/sikca-sorulan-sorular",
     "/gizlilik-politikasi",
     "/sartlar-kosullar",
     "/kvkk",
   ].map((path) => ({
-    url: `${site.url}${path}`,
+    url: `${base}${path}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: path === "" ? 1 : 0.7,
   }));
 
-  const requestRoutes = requests.map((r) => ({
-    url: `${site.url}/yardim-talepleri/${r.slug}`,
-    lastModified: new Date(r.createdAt),
-    changeFrequency: "daily" as const,
+  const projectRoutes = projects.map((p) => ({
+    url: `${base}/projelerimiz/${p.slug}`,
+    lastModified: new Date(p.date),
+    changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
   const postRoutes = posts.map((p) => ({
-    url: `${site.url}/duyurular/${p.slug}`,
+    url: `${base}/duyurular/${p.slug}`,
     lastModified: new Date(p.date),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...requestRoutes, ...postRoutes];
+  return [...staticRoutes, ...projectRoutes, ...postRoutes];
 }

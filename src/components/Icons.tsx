@@ -138,6 +138,18 @@ export const CloseIcon = (p: P) => (
   </svg>
 );
 
+export const FilterIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="M4 6h16M7 12h10M10 18h4" />
+  </svg>
+);
+
+export const ChevronDownIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <path d="m6 9.5 6 6 6-6" />
+  </svg>
+);
+
 export const iconMap = {
   book: BookIcon,
   pill: PillIcon,
@@ -145,4 +157,8 @@ export const iconMap = {
   backpack: BackpackIcon,
   basket: BasketIcon,
   smile: SmileIcon,
+  users: UsersIcon,
+  spark: SparkIcon,
+  hand: HandIcon,
+  shield: ShieldIcon,
 } as const;

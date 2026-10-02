@@ -4,52 +4,53 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Gizlilik Politikası",
-  description: "Kişisel verilerinizi nasıl topladığımız, işlediğimiz ve koruduğumuz hakkında bilgi.",
+  description: `${site.legalName} gizlilik politikası ve çerez kullanımı hakkında bilgilendirme.`,
 };
 
 export default function PrivacyPage() {
   return (
     <LegalPage
-      eyebrow="Yasal"
+      eyebrow="Gizlilik"
       title="Gizlilik Politikası"
-      description="Kişisel verilerinizi nasıl topladığımızı, hangi amaçlarla işlediğimizi ve nasıl koruduğumuzu açıklıyoruz."
-      updatedAt="1 Ağustos 2026"
+      description="Bu sitede hangi verileri topladığımızı, neden topladığımızı ve nasıl koruduğumuzu açıklıyoruz."
+      updatedAt="1 Ekim 2026"
       sections={[
         {
-          heading: "Toplanan veriler",
+          heading: "Topladığımız veriler",
           paragraphs: [
-            "Sitemizdeki formlar aracılığıyla ad soyad, e-posta adresi, telefon numarası ve ilettiğiniz mesaj içeriğini topluyoruz.",
-            "Yardım talebi başvurularında, talebin doğrulanabilmesi için ek belge ve bilgi talep edilebilir. Bu belgeler yalnızca sosyal inceleme ekibimizce görülür.",
+            "Sitemizdeki iletişim ve gönüllü başvuru formlarını doldurduğunuzda yalnızca bize ilettiğiniz bilgileri işliyoruz.",
           ],
-        },
-        {
-          heading: "Verilerin işlenme amacı",
-          paragraphs: ["Kişisel verilerinizi aşağıdaki amaçlarla işliyoruz:"],
           list: [
-            "Talep ve başvurularınızı değerlendirmek ve sonuçlandırmak",
-            "Bağış süreçlerini yürütmek ve makbuz düzenlemek",
-            "Gönüllü eşleştirmelerini yapmak",
-            "Yasal yükümlülüklerimizi yerine getirmek",
+            "Ad ve soyad",
+            "E-posta adresi ve/veya telefon numarası",
+            "Başvuru konusu ve mesaj içeriği",
           ],
         },
         {
-          heading: "Verilerin paylaşımı",
+          heading: "Verileri neden işliyoruz",
           paragraphs: [
-            "Kişisel verileriniz üçüncü taraflarla ticari amaçlarla paylaşılmaz. Yalnızca yasal zorunluluk hâlinde yetkili kamu kurumlarına aktarılabilir.",
-            "Yayımlanan yardım taleplerinde ihtiyaç sahiplerinin kimlik bilgileri gösterilmez; yalnızca adın ilk harfi ve şehir bilgisi paylaşılır.",
+            "Bize ilettiğiniz bilgileri yalnızca talebinizi değerlendirmek ve size geri dönüş yapmak için kullanıyoruz.",
+            "Derneğimiz bağış toplamadığı için hiçbir ödeme, kart veya banka bilgisi toplanmaz, saklanmaz ve işlenmez.",
+          ],
+        },
+        {
+          heading: "Verileri kimlerle paylaşıyoruz",
+          paragraphs: [
+            "Kişisel verilerinizi üçüncü taraflarla ticari amaçla paylaşmıyor, satmıyoruz. Verilere yalnızca başvurunuzu değerlendiren dernek yetkilileri erişebilir.",
+            "Yasal bir yükümlülük doğması hâlinde yetkili kamu kurumlarıyla paylaşım yapılabilir.",
           ],
         },
         {
           heading: "Çerezler",
           paragraphs: [
-            "Sitemiz, temel işlevlerin çalışması için zorunlu çerezleri kullanır. Analitik çerezler yalnızca onayınızla etkinleştirilir.",
+            "Sitenin çalışması için zorunlu çerezleri kullanıyoruz. İstatistik amaçlı çerezler yalnızca açık onayınızla etkinleşir ve onayınızı tarayıcınızdan dilediğiniz zaman geri alabilirsiniz.",
           ],
         },
         {
-          heading: "Haklarınız",
+          heading: "Saklama süresi ve haklarınız",
           paragraphs: [
-            "KVKK kapsamında verilerinize erişme, düzeltilmesini veya silinmesini talep etme hakkına sahipsiniz.",
-            `Taleplerinizi ${site.email} adresine iletebilirsiniz; başvurunuz en geç 30 gün içinde yanıtlanır.`,
+            "Başvurunuza ilişkin veriler, talebinizin sonuçlanmasının ardından makul bir süre içinde silinir.",
+            `Verilerinizin silinmesini, düzeltilmesini veya bir kopyasını talep etmek için ${site.email} adresine yazabilirsiniz.`,
           ],
         },
       ]}

@@ -1,43 +1,46 @@
-import { Photo } from "@/components/Photo";
 import type { Metadata } from "next";
+import { Photo } from "@/components/Photo";
 import { PageHero, SectionHeading } from "@/components/Section";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/Button";
-import { Stats } from "@/components/Stats";
-import { site } from "@/lib/site";
-import { ArrowIcon, CheckIcon, HandIcon, HeartIcon, ShieldIcon, SparkIcon, UsersIcon } from "@/components/Icons";
+import { team, initialsOf } from "@/data/team";
+import { areas } from "@/data/areas";
+import { history, mission, site, vision } from "@/lib/site";
+import {
+  ArrowIcon,
+  HandIcon,
+  ShieldIcon,
+  SparkIcon,
+  UsersIcon,
+  iconMap,
+} from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Hakkımızda",
-  description: "Derneğin kuruluş hikâyesi, çalışma ilkeleri, ekibi ve şeffaflık yaklaşımı.",
+  description: `${site.legalName} misyonu, vizyonu ve kuruluş hikâyesi. ${history.text}`,
 };
 
-const timeline = [
-  { year: "2023", title: "İlk adım", text: "Bir hastane koridorunda başlayan gönüllü dayanışma, sekiz kişilik bir ekiple derneğe dönüştü." },
-  { year: "2024", title: "Platformun kuruluşu", text: "İhtiyaç sahiplerini destekçilerle doğrudan buluşturan çevrim içi platformumuz yayına alındı." },
-  { year: "2025", title: "Şeffaflık raporu", text: "Toplanan tüm bağışların dağılımını kalem kalem paylaştığımız ilk yıllık raporumuzu yayımladık." },
-  { year: "2026", title: "Yaygınlaşma", text: "12 ilde gönüllü ağımızla 1.000'den fazla aileye ulaştık; eğitim programlarımızı başlattık." },
-];
-
 const principles = [
-  { icon: ShieldIcon, title: "Şeffaflık", text: "Her kaynağın nereden gelip nereye gittiğini kayıt altına alır, yıllık olarak yayımlarız." },
-  { icon: HandIcon, title: "Aracısızlık", text: "Destekçi ile ihtiyaç sahibini doğrudan buluşturur, süreci yalnızca kolaylaştırırız." },
-  { icon: UsersIcon, title: "Onur", text: "Kimseyi mağdur olarak göstermez, mahremiyeti her koşulda koruruz." },
-  { icon: SparkIcon, title: "Süreklilik", text: "Tek seferlik yardım yerine, süreci sonuna kadar takip eden bir destek modeli kurarız." },
-];
-
-const team = [
-  { name: "[Ad Soyad]", role: "Kurucu & Genel Koordinatör" },
-  { name: "[Ad Soyad]", role: "Sosyal İnceleme Sorumlusu" },
-  { name: "[Ad Soyad]", role: "Sağlık Danışmanı" },
-  { name: "[Ad Soyad]", role: "Gönüllü Koordinatörü" },
-  { name: "[Ad Soyad]", role: "Mali İşler & Raporlama" },
-  { name: "[Ad Soyad]", role: "İletişim & Kampanyalar" },
-];
-
-const transparency = [
-  { label: "Doğrudan yardım", value: 92 },
-  { label: "Operasyon ve lojistik", value: 6 },
-  { label: "İletişim ve tanıtım", value: 2 },
+  {
+    icon: UsersIcon,
+    title: "Kapsayıcı bir ortam",
+    text: "Yardıma ihtiyaç duyan ve yardım etmek isteyen insanları aynı ortamda buluşturmayı önemsiyoruz.",
+  },
+  {
+    icon: HandIcon,
+    title: "Erişilebilir gönüllülük",
+    text: "Katkı sunmanın büyük imkânlar gerektirmediğine; niyet ve zamanın yeterli olduğuna inanıyoruz.",
+  },
+  {
+    icon: ShieldIcon,
+    title: "Mahremiyet",
+    text: "Birlikte çalıştığımız kişilerin kimlik bilgilerini hiçbir koşulda yayımlamıyoruz.",
+  },
+  {
+    icon: SparkIcon,
+    title: "Kıvılcım olmak",
+    text: "Harekete geçmek isteyen gençler için başlangıç noktası olmayı hedefliyoruz.",
+  },
 ];
 
 export default function AboutPage() {
@@ -45,163 +48,199 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="Hakkımızda"
-        title="Bir hastane koridorunda başlayan dayanışma"
-        description={`${site.name}, ${site.founded} yılında gönüllü bir grubun küçük bir yardımlaşma girişimiyle kuruldu. Bugün 12 ilde, yüzlerce gönüllüyle aynı amaç için çalışıyoruz.`}
-        image="/images/sinif.jpg"
+        title="Gençlerden doğan bir dayanışma derneği"
+        description={site.description}
+        image="/images/hakkimizda.jpg"
       >
         <div className="flex flex-wrap gap-3">
-          <Button href="/bagis" variant="primary" size="lg">
-            <HeartIcon className="h-5 w-5" /> Bağış Yap
+          <Button href="/projelerimiz" variant="primary">
+            Projelerimiz <ArrowIcon className="h-4 w-4" />
           </Button>
-          <Button href="/gonullu-ol" variant="light" size="lg">
+          <Button href="/gonullu-ol" variant="light">
             Gönüllü Ol
           </Button>
         </div>
       </PageHero>
 
-      <section className="container-x py-20 lg:py-24">
+      {/* Misyon */}
+      <section className="container-x py-20 lg:py-28">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <SectionHeading
-              eyebrow="Misyonumuz"
-              title="Kimse yalnız kalmasın"
-              description="Zorlu bir tedavi ya da geçim sürecinden geçen ailelerin en çok ihtiyaç duyduğu şey çoğu zaman sadece paradan ibaret değil: doğru bilgiye, bir yol arkadaşına ve umuda ihtiyaç duyuyorlar."
-            />
-            <div className="mt-7 space-y-5 text-[16px] leading-[1.85] text-ink-500">
-              <p>
-                Bu yüzden yalnızca kaynak aktarmıyor; ihtiyaç sahibini destekçiyle doğrudan
-                buluşturuyor, süreci baştan sona birlikte yürütüyoruz. Her talep yerinde inceleniyor,
-                belgeleniyor ve sonuçlanana kadar takip ediliyor.
-              </p>
-              <p>
-                Vizyonumuz, her ilde iyiliğin kendiliğinden büyüdüğü bir gönüllü ağı kurmak. Bunun
-                için teknolojiyi, şeffaflığı ve sahadaki insan emeğini bir araya getiriyoruz.
-              </p>
-            </div>
-
-            <ul className="mt-9 grid gap-3 sm:grid-cols-2">
-              {[
-                "Her talep sosyal incelemeden geçer",
-                "Bağışların %92'si doğrudan yardıma gider",
-                "Kimlik bilgileri asla yayımlanmaz",
-                "Yıllık şeffaflık raporu yayımlanır",
-              ].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-sand-200 bg-white p-4 text-[14.5px] text-ink-700 shadow-card"
-                >
-                  <span className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-clay-600 text-white">
-                    <CheckIcon className="h-3 w-3" />
-                  </span>
-                  {item}
-                </li>
+            <SectionHeading eyebrow="Misyonumuz" title="Neden varız?" />
+            <Reveal className="mt-8 space-y-5">
+              <p className="text-[18px] leading-[1.75] font-medium text-ink-800">{mission.lead}</p>
+              {mission.paragraphs.map((p) => (
+                <p key={p.slice(0, 24)} className="text-[16.5px] leading-[1.85] text-ink-600">
+                  {p}
+                </p>
               ))}
-            </ul>
+            </Reveal>
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="relative aspect-4/3 overflow-hidden rounded-3xl shadow-lift">
+          <Reveal className="lg:col-span-5" delay={0.1}>
+            <div className="relative aspect-4/5 overflow-hidden rounded-3xl shadow-lift">
               <Photo
-                src="/images/hakkimizda.jpg"
-                alt="Sınıfta birlikte çalışan çocuklar"
+                src="/images/sinif.jpg"
+                alt="Birlikte çalışan öğrenciler"
                 fill
-                sizes="(min-width: 1024px) 460px, 100vw"
+                sizes="(min-width: 1024px) 440px, 100vw"
                 className="object-cover"
               />
             </div>
+          </Reveal>
+        </div>
+      </section>
 
-            <div className="mt-6 rounded-3xl border border-sand-200 bg-white p-7 shadow-card">
-              <span className="eyebrow">Şeffaflık</span>
-              <h3 className="mt-4 font-display text-[21px] font-bold">Bağışlar nereye gidiyor?</h3>
-              <p className="mt-2 text-[14px] text-ink-500">2025 şeffaflık raporundan alınan dağılım.</p>
-              <div className="mt-7 space-y-5">
-                {transparency.map((t) => (
-                  <div key={t.label}>
-                    <div className="mb-2 flex items-baseline justify-between text-[14px]">
-                      <span className="text-ink-700">{t.label}</span>
-                      <span className="font-display font-bold text-clay-700">%{t.value}</span>
-                    </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-sand-200">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-clay-400 to-clay-600"
-                        style={{ width: `${t.value}%` }}
-                      />
-                    </div>
-                  </div>
+      {/* Vizyon */}
+      <section className="relative isolate overflow-hidden border-y border-sand-200 bg-sand-100 py-20 lg:py-28">
+        <div
+          className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-clay-200/35 blur-3xl"
+          aria-hidden="true"
+        />
+        <div className="container-x relative">
+          <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+            <Reveal className="order-2 lg:order-1 lg:col-span-5">
+              <div className="relative aspect-4/5 overflow-hidden rounded-3xl shadow-lift">
+                <Photo
+                  src="/images/sosyal.jpg"
+                  alt="Birlikte vakit geçiren gençler"
+                  fill
+                  sizes="(min-width: 1024px) 440px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
+
+            <div className="order-1 lg:order-2 lg:col-span-7">
+              <SectionHeading eyebrow="Vizyonumuz" title="Nasıl bir gelecek hayal ediyoruz?" />
+              <Reveal className="mt-8 space-y-5">
+                <p className="text-[18px] leading-[1.75] font-medium text-ink-800">{vision.lead}</p>
+                {vision.paragraphs.map((p) => (
+                  <p key={p.slice(0, 24)} className="text-[16.5px] leading-[1.85] text-ink-600">
+                    {p}
+                  </p>
                 ))}
-              </div>
-              <Button href="/iletisim" variant="outline" size="sm" className="mt-8 w-full">
-                Raporu talep edin <ArrowIcon className="h-4 w-4" />
-              </Button>
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      <Stats />
-
-      <section className="container-x py-20 lg:py-24">
+      {/* Tarihçe */}
+      <section className="container-x py-20 lg:py-28">
         <SectionHeading
-          eyebrow="İlkelerimiz"
-          title="Nasıl çalışıyoruz?"
-          description="Kurulduğumuz günden bu yana değişmeyen dört temel ilkemiz var."
+          eyebrow="Tarihçemiz"
+          title="Nasıl başladık?"
           align="center"
         />
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {principles.map(({ icon: Icon, title, text }) => (
-            <div
-              key={title}
-              className="rounded-3xl border border-sand-200 bg-white p-7 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
-            >
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-clay-600 text-white shadow-glow">
-                <Icon className="h-6 w-6" />
+
+        <Reveal className="mx-auto mt-12 max-w-3xl">
+          <div className="relative overflow-hidden rounded-3xl border border-sand-200 bg-white p-8 shadow-card sm:p-12">
+            <span
+              className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-clay-50"
+              aria-hidden="true"
+            />
+            <div className="relative">
+              <span className="inline-flex items-center gap-2 rounded-full bg-clay-600 px-4 py-2 font-display text-[14px] font-bold text-white shadow-glow">
+                {site.founded}
               </span>
-              <h3 className="mt-5 font-display text-[17px] font-bold">{title}</h3>
-              <p className="mt-2.5 text-[14px] leading-[1.7] text-ink-500">{text}</p>
+              <p className="mt-7 text-[19px] leading-[1.75] text-ink-800 sm:text-[21px]">
+                {history.text}
+              </p>
+              <p className="mt-6 text-[15.5px] leading-[1.8] text-ink-500">
+                Kulüp olarak yürüttüğümüz çalışmalarda, yardım etmek isteyen ve yardıma ihtiyaç
+                duyan insanları buluşturan kalıcı bir yapıya ihtiyaç olduğunu gördük. Derneği de bu
+                ihtiyaçtan yola çıkarak kurduk.
+              </p>
             </div>
-          ))}
-        </div>
+          </div>
+        </Reveal>
       </section>
 
-      <section className="border-y border-sand-200 bg-sand-100 py-20 lg:py-24">
+      {/* İlkelerimiz */}
+      <section className="border-y border-sand-200 bg-sand-100 py-20 lg:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="Yolculuğumuz" title="Kısa tarihçe" align="center" />
-          <div className="mt-14 grid gap-5 lg:grid-cols-4">
-            {timeline.map((t) => (
-              <div key={t.year} className="rounded-3xl border border-sand-200 bg-white p-7 shadow-card">
-                <span className="inline-flex rounded-full bg-clay-50 px-3.5 py-1.5 font-display text-[13px] font-bold text-clay-700">
-                  {t.year}
-                </span>
-                <h3 className="mt-4 font-display text-[18px] font-bold">{t.title}</h3>
-                <p className="mt-2.5 text-[14px] leading-[1.7] text-ink-500">{t.text}</p>
-              </div>
+          <SectionHeading
+            eyebrow="İlkelerimiz"
+            title="Çalışırken neye dikkat ediyoruz?"
+            align="center"
+          />
+
+          <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {principles.map(({ icon: Icon, title, text }) => (
+              <StaggerItem key={title}>
+                <div className="h-full rounded-3xl border border-sand-200 bg-white p-7 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-clay-200 hover:shadow-lift">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-clay-50 text-clay-600">
+                    <Icon className="h-5.5 w-5.5" />
+                  </span>
+                  <h3 className="mt-5 font-display text-[17px] font-bold">{title}</h3>
+                  <p className="mt-2.5 text-[14.5px] leading-[1.75] text-ink-500">{text}</p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
-      <section className="container-x py-20 lg:py-24">
+      {/* Çalışma alanları */}
+      <section className="container-x py-20 lg:py-28">
         <SectionHeading
-          eyebrow="Ekibimiz"
-          title="Perde arkasındaki gönüllüler"
-          description="Tamamı gönüllü esasına dayanan çekirdek ekibimiz, sahadaki yüzlerce gönüllüyle birlikte çalışıyor."
-          align="center"
+          eyebrow="Çalışma alanlarımız"
+          title="Hangi alanlarda çalışıyoruz?"
+          description="Projelerimizi bu alanlar altında planlıyor ve yürütüyoruz."
         />
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {team.map((m) => (
-            <div
-              key={m.role}
-              className="flex items-center gap-4 rounded-3xl border border-sand-200 bg-white p-5 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
-            >
-              <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-sand-100 font-display text-[15px] font-bold text-clay-600">
-                {m.role.slice(0, 2)}
-              </span>
-              <div>
-                <div className="font-display text-[15.5px] font-bold text-ink-950">{m.name}</div>
-                <div className="mt-0.5 text-[13px] text-ink-500">{m.role}</div>
-              </div>
-            </div>
-          ))}
+
+        <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {areas.map((area) => {
+            const Icon = iconMap[area.icon];
+            return (
+              <StaggerItem key={area.slug}>
+                <div className="flex h-full gap-4 rounded-3xl border border-sand-200 bg-white p-6 shadow-card">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-clay-50 text-clay-600">
+                    <Icon className="h-5.5 w-5.5" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-[16.5px] font-bold">{area.name}</h3>
+                    <p className="mt-2 text-[14px] leading-[1.7] text-ink-500">{area.description}</p>
+                  </div>
+                </div>
+              </StaggerItem>
+            );
+          })}
+        </Stagger>
+      </section>
+
+      {/* Kurucu ekip */}
+      <section className="border-t border-sand-200 bg-sand-100 py-20 lg:py-28">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Kurucu ekip"
+            title="Derneği kuranlar"
+            description={`Derman Derneği, ${site.foundingClub} üyeleri tarafından kuruldu.`}
+            align="center"
+          />
+
+          <Stagger className="mx-auto mt-14 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {team.map((member, i) => (
+              <StaggerItem key={`${member.name}-${i}`}>
+                <div className="h-full rounded-3xl border border-sand-200 bg-white p-7 text-center shadow-card transition-transform duration-500 hover:-translate-y-1">
+                  <span className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-clay-600 font-display text-[18px] font-bold text-white shadow-glow">
+                    {initialsOf(member.name)}
+                  </span>
+                  <h3 className="mt-5 font-display text-[16px] font-bold text-ink-950">
+                    {member.name}
+                  </h3>
+                  <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink-500">{member.role}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+
+          <Reveal className="mt-12 flex justify-center">
+            <Button href="/gonullu-ol" size="lg">
+              Siz de aramıza katılın <ArrowIcon className="h-4 w-4" />
+            </Button>
+          </Reveal>
         </div>
       </section>
     </>
