@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 import { LogoMark } from "./Logo";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { ArrowIcon, MailIcon, PhoneIcon, PinIcon, ClockIcon, ShieldIcon } from "./Icons";
+import { ArrowIcon, MailIcon, ClockIcon, ShieldIcon } from "./Icons";
 
 const columns = [
   {
@@ -11,7 +11,6 @@ const columns = [
     links: [
       { href: "/hakkimizda", label: "Hakkımızda" },
       { href: "/projelerimiz", label: "Projelerimiz" },
-      { href: "/duyurular", label: "Duyurular" },
       { href: "/iletisim", label: "İletişim" },
     ],
   },
@@ -135,19 +134,9 @@ export function Footer() {
             </h3>
             <ul className="mt-5 space-y-4 text-[14.5px] leading-relaxed text-sand-300/85">
               <li className="flex gap-3">
-                <PinIcon className="mt-0.5 h-4.5 w-4.5 shrink-0 text-clay-400" />
-                <span>{site.address}</span>
-              </li>
-              <li className="flex gap-3">
                 <MailIcon className="mt-0.5 h-4.5 w-4.5 shrink-0 text-clay-400" />
                 <a href={`mailto:${site.email}`} className="hover:text-white">
                   {site.email}
-                </a>
-              </li>
-              <li className="flex gap-3">
-                <PhoneIcon className="mt-0.5 h-4.5 w-4.5 shrink-0 text-clay-400" />
-                <a href={`tel:${site.phone.replace(/[^+\d]/g, "")}`} className="hover:text-white">
-                  {site.phone}
                 </a>
               </li>
               <li className="flex gap-3">
@@ -158,11 +147,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 border-t border-white/10 py-7 text-[13px] text-sand-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="border-t border-white/10 py-7 text-[13px] text-sand-400">
           <p>
             © {year} {site.legalName}
           </p>
-          <p>Dernek kayıt no: {site.registryNo}</p>
         </div>
       </div>
     </footer>

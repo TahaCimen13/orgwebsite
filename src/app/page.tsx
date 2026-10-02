@@ -4,19 +4,15 @@ import { Hero } from "@/components/Hero";
 import { SectionHeading } from "@/components/Section";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { ProjectCard } from "@/components/ProjectCard";
-import { PostCard } from "@/components/PostCard";
 import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/Button";
 import { areas } from "@/data/areas";
 import { featuredProjects, projectCountByArea } from "@/data/projects";
-import { postsByDate } from "@/data/posts";
 import { mission, site, vision } from "@/lib/site";
 import {
   ArrowIcon,
   HandIcon,
   MailIcon,
-  PhoneIcon,
-  PinIcon,
   ShieldIcon,
   SparkIcon,
   UsersIcon,
@@ -66,7 +62,6 @@ const values = [
 
 export default function HomePage() {
   const featured = featuredProjects().slice(0, 6);
-  const latestPosts = postsByDate().slice(0, 3);
 
   return (
     <>
@@ -213,7 +208,7 @@ export default function HomePage() {
               Projelerimiz çok yakında
             </p>
             <p className="mx-auto mt-3 max-w-md text-[14.5px] leading-relaxed text-ink-600">
-              İlk projelerimizi hazırlıyoruz. Duyurulardan haberdar olmak için bizi takip edin.
+              İlk projelerimizi hazırlıyoruz. Yayımlandığında burada görebilirsiniz.
             </p>
           </Reveal>
         )}
@@ -287,28 +282,6 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      {/* Duyurular */}
-      <section className="border-t border-sand-200 bg-sand-100 py-20 lg:py-28">
-        <div className="container-x">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <SectionHeading eyebrow="Duyurular" title="Son gelişmeler" />
-            <Reveal className="shrink-0">
-              <Button href="/duyurular" variant="outline">
-                Tüm duyurular <ArrowIcon className="h-4 w-4" />
-              </Button>
-            </Reveal>
-          </div>
-
-          <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
-            {latestPosts.map((p) => (
-              <StaggerItem key={p.slug} className="h-full">
-                <PostCard post={p} />
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
       {/* İletişim */}
       <section className="container-x py-20 lg:py-28">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
@@ -321,13 +294,6 @@ export default function HomePage() {
             <Stagger className="mt-10 space-y-3">
               {[
                 { icon: MailIcon, t: "E-posta", v: site.email, href: `mailto:${site.email}` },
-                {
-                  icon: PhoneIcon,
-                  t: "Telefon",
-                  v: site.phone,
-                  href: `tel:${site.phone.replace(/[^+\d]/g, "")}`,
-                },
-                { icon: PinIcon, t: "Adres", v: site.address },
               ].map(({ icon: Icon, t, v, href }) => (
                 <StaggerItem key={t}>
                   <div className="flex items-start gap-4 rounded-2xl border border-sand-200 bg-white p-5 shadow-card">

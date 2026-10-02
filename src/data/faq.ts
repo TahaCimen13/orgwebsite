@@ -2,7 +2,7 @@
 export const faqs = [
   {
     q: "Derneğe bağış yapabilir miyim?",
-    a: "Hayır. Derman Derneği bağış toplamamaktadır ve herhangi bir hesap numarası ya da ödeme kanalı bulunmamaktadır. Desteklerinizi gönüllü katılım yoluyla sunabilirsiniz; bize zaman ayırmanız, bir atölyede yer almanız veya duyurularımızı paylaşmanız en çok ihtiyaç duyduğumuz katkıdır.",
+    a: "Hayır. Derman Derneği bağış toplamamaktadır ve herhangi bir hesap numarası ya da ödeme kanalı bulunmamaktadır. Desteklerinizi gönüllü katılım yoluyla sunabilirsiniz; bize zaman ayırmanız, bir atölyede yer almanız veya çalışmalarımızı çevrenizle paylaşmanız en çok ihtiyaç duyduğumuz katkıdır.",
   },
   {
     q: "Gönüllü olmak için ne yapmalıyım?",
@@ -18,7 +18,7 @@ export const faqs = [
   },
   {
     q: "Projelere nasıl başvurulur?",
-    a: "Her projenin duyurusunda katılım koşulları ve başvuru yolu ayrıca belirtiliyor. Genel olarak iletişim sayfamızdaki formu doldurarak ya da gönüllü başvurusu yaparak tüm çalışmalarımıza katılabilirsiniz.",
+    a: "Her projenin sayfasında ne yaptığımızı anlatıyoruz. Genel olarak iletişim sayfamızdaki formu doldurarak ya da gönüllü başvurusu yaparak tüm çalışmalarımıza katılabilirsiniz.",
   },
   {
     q: "Yardıma ihtiyacım var, size nasıl ulaşabilirim?",
@@ -30,6 +30,6 @@ export const faqs = [
   },
   {
     q: "Kurumsal iş birliği yapabilir miyiz?",
-    a: "Maddi destek dışındaki iş birliklerine açığız: mekân, atölye desteği, uzman katılımı veya duyuru desteği gibi katkılar için iletişim sayfamızdan bize yazabilirsiniz.",
+    a: "Maddi destek dışındaki iş birliklerine açığız: mekân, atölye desteği, uzman katılımı veya tanıtım desteği gibi katkılar için iletişim sayfamızdan bize yazabilirsiniz.",
   },
 ];

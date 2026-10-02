@@ -3,7 +3,7 @@ import { PageHero } from "@/components/Section";
 import { ProjectFilter } from "@/components/ProjectFilter";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/Button";
-import { projectsByDate } from "@/data/projects";
+import { projects } from "@/data/projects";
 import { areaBySlug } from "@/data/areas";
 import { ArrowIcon } from "@/components/Icons";
 
@@ -23,7 +23,7 @@ export default async function ProjectsPage({
   // Geçersiz bir alan adı gelirse sessizce "tümü"ne düşeriz.
   const initialArea = raw && areaBySlug(raw) ? raw : "tumu";
 
-  const all = projectsByDate();
+  const all = projects;
 
   return (
     <>
@@ -47,10 +47,10 @@ export default async function ProjectsPage({
               Projelerimiz çok yakında
             </p>
             <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-ink-600">
-              İlk projelerimizi hazırlıyoruz. Duyurulduğunda buradan takip edebilirsiniz.
+              İlk projelerimizi hazırlıyoruz. Yayımlandığında buradan takip edebilirsiniz.
             </p>
-            <Button href="/duyurular" variant="outline" className="mt-8">
-              Duyurulara göz atın
+            <Button href="/gonullu-ol" variant="outline" className="mt-8">
+              Gönüllü Ol
             </Button>
           </Reveal>
         )}

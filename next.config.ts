@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
       { source: "/yardim-talebi-olustur", destination: "/iletisim", permanent: true },
       { source: "/bagis", destination: "/gonullu-ol", permanent: true },
       { source: "/gonulluler", destination: "/hakkimizda", permanent: true },
+      { source: "/duyurular", destination: "/", permanent: true },
+      { source: "/duyurular/:slug", destination: "/", permanent: true },
     ];
   },
 };

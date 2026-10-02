@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { nav, site } from "@/lib/site";
 import { Logo } from "./Logo";
 import { Button } from "./Button";
-import { CloseIcon, MailIcon, MenuIcon, PhoneIcon } from "./Icons";
+import { CloseIcon, MailIcon, MenuIcon } from "./Icons";
 
 export function Header() {
   const pathname = usePathname();
@@ -136,12 +136,6 @@ export function Header() {
             <div className="mt-8 rounded-2xl bg-sand-100 p-5 text-[14px] text-ink-600">
               <a href={`mailto:${site.email}`} className="flex items-center gap-2.5">
                 <MailIcon className="h-4 w-4 text-clay-600" /> {site.email}
-              </a>
-              <a
-                href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}
-                className="mt-2.5 flex items-center gap-2.5"
-              >
-                <PhoneIcon className="h-4 w-4 text-clay-600" /> {site.phone}
               </a>
             </div>
           </motion.div>

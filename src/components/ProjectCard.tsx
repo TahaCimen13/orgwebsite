@@ -1,16 +1,8 @@
 import { Photo } from "./Photo";
 import Link from "next/link";
 import type { Project } from "@/data/projects";
-import { statusLabels } from "@/data/projects";
 import { areaBySlug } from "@/data/areas";
-import { formatMonthYear } from "@/lib/format";
-import { ArrowIcon, PinIcon } from "./Icons";
-
-const statusStyles: Record<Project["status"], string> = {
-  "devam-ediyor": "bg-olive-600 text-white",
-  tamamlandi: "bg-ink-900 text-white",
-  planlaniyor: "bg-clay-600 text-white",
-};
+import { ArrowIcon } from "./Icons";
 
 export function ProjectCard({ project }: { project: Project }) {
   const area = areaBySlug(project.area);
@@ -26,29 +18,13 @@ export function ProjectCard({ project }: { project: Project }) {
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950/50 via-transparent to-transparent" />
-        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-          <span className="rounded-full bg-white/95 px-3 py-1.5 text-[11.5px] font-semibold text-ink-800 backdrop-blur">
-            {area?.name}
-          </span>
-          <span
-            className={`rounded-full px-3 py-1.5 text-[11.5px] font-semibold ${statusStyles[project.status]}`}
-          >
-            {statusLabels[project.status]}
-          </span>
-        </div>
-        {project.location && (
-          <span className="absolute bottom-3.5 left-4 inline-flex items-center gap-1.5 text-[12px] font-medium text-white/95">
-            <PinIcon className="h-3.5 w-3.5" /> {project.location}
-          </span>
-        )}
+        <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[11.5px] font-semibold text-ink-800 backdrop-blur">
+          {area?.name}
+        </span>
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <time dateTime={project.date} className="text-[12.5px] text-ink-400">
-          {formatMonthYear(project.date)}
-        </time>
-
-        <h3 className="mt-2 font-display text-[18px] font-bold leading-snug text-ink-950">
+        <h3 className="font-display text-[18px] font-bold leading-snug text-ink-950">
           <Link href={`/projelerimiz/${project.slug}`} className="after:absolute after:inset-0">
             {project.title}
           </Link>

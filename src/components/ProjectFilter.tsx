@@ -8,10 +8,6 @@ import { ProjectCard } from "./ProjectCard";
 import { Input } from "./Field";
 import { ChevronDownIcon, FilterIcon } from "./Icons";
 
-type Sort = "yeni" | "devam-eden" | "a-z";
-
-const DEFAULT_SORT: Sort = "yeni";
-
 export function ProjectFilter({
   projects,
   initialArea = "tumu",
@@ -21,44 +17,29 @@ export function ProjectFilter({
 }) {
   const [area, setArea] = useState(initialArea);
   const [query, setQuery] = useState("");
-  const [sort, setSort] = useState<Sort>(DEFAULT_SORT);
   // Yalnızca mobilde geçerli — masaüstünde panel her zaman açıktır.
   const [open, setOpen] = useState(false);
   const reduced = useReducedMotion();
 
   const filtered = useMemo(() => {
     const q = query.trim().toLocaleLowerCase("tr");
-    const list = projects.filter((p) => {
+    return projects.filter((p) => {
       const matchesArea = area === "tumu" || p.area === area;
       const matchesQuery =
         !q ||
         p.title.toLocaleLowerCase("tr").includes(q) ||
-        p.summary.toLocaleLowerCase("tr").includes(q) ||
-        (p.location ?? "").toLocaleLowerCase("tr").includes(q);
+        p.summary.toLocaleLowerCase("tr").includes(q);
       return matchesArea && matchesQuery;
     });
-
-    return [...list].sort((a, b) => {
-      if (sort === "a-z") return a.title.localeCompare(b.title, "tr");
-      if (sort === "devam-eden") {
-        const rank = (p: Project) =>
-          p.status === "devam-ediyor" ? 0 : p.status === "planlaniyor" ? 1 : 2;
-        if (rank(a) !== rank(b)) return rank(a) - rank(b);
-      }
-      return b.date.localeCompare(a.date);
-    });
-  }, [projects, area, query, sort]);
+  }, [projects, area, query]);
 
   const tabs = [{ slug: "tumu", name: "Tümü" }, ...areas];
   const activeAreaName = tabs.find((t) => t.slug === area)?.name ?? "Tümü";
-
-  const activeCount =
-    (area !== "tumu" ? 1 : 0) + (query.trim() ? 1 : 0) + (sort !== DEFAULT_SORT ? 1 : 0);
+  const activeCount = (area !== "tumu" ? 1 : 0) + (query.trim() ? 1 : 0);
 
   const clearAll = () => {
     setArea("tumu");
     setQuery("");
-    setSort(DEFAULT_SORT);
   };
 
   return (
@@ -116,33 +97,16 @@ export function ProjectFilter({
           open ? "mt-4 block animate-fade-up lg:mt-0 lg:animate-none" : "hidden lg:block"
         }
       >
-        <div className="flex flex-col gap-4 rounded-3xl border border-sand-200 bg-white p-4 shadow-card sm:flex-row sm:items-center">
-          <div className="flex-1">
-            <label htmlFor="q" className="sr-only">
-              Proje ara
-            </label>
-            <Input
-              id="q"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Proje, yer veya anahtar kelime ara..."
-            />
-          </div>
-          <div className="sm:w-56">
-            <label htmlFor="sort" className="sr-only">
-              Sırala
-            </label>
-            <select
-              id="sort"
-              value={sort}
-              onChange={(e) => setSort(e.target.value as Sort)}
-              className="w-full rounded-2xl border border-sand-300 bg-white px-4 py-3 text-[15px] text-ink-900 focus:border-clay-400 focus:outline-none focus:ring-4 focus:ring-clay-500/10"
-            >
-              <option value="yeni">En yeni</option>
-              <option value="devam-eden">Önce devam edenler</option>
-              <option value="a-z">İsme göre (A–Z)</option>
-            </select>
-          </div>
+        <div className="rounded-3xl border border-sand-200 bg-white p-4 shadow-card">
+          <label htmlFor="q" className="sr-only">
+            Proje ara
+          </label>
+          <Input
+            id="q"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Proje veya anahtar kelime ara..."
+          />
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2 lg:mt-6">

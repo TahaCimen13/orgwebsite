@@ -5,10 +5,9 @@ import { Photo } from "@/components/Photo";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/Button";
 import { ProjectCard } from "@/components/ProjectCard";
-import { projects, projectBySlug, statusLabels } from "@/data/projects";
+import { projects, projectBySlug } from "@/data/projects";
 import { areaBySlug } from "@/data/areas";
-import { formatDate } from "@/lib/format";
-import { ArrowIcon, CheckIcon, PinIcon, iconMap } from "@/components/Icons";
+import { ArrowIcon, iconMap } from "@/components/Icons";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -62,9 +61,12 @@ export default async function ProjectDetailPage({
           className="-z-10 object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950/94 via-ink-950/80 to-ink-950/45" />
-        <div className="container-x py-18 sm:py-24">
+        <div className="container-x py-12 sm:py-20 lg:py-24">
           <Reveal className="max-w-3xl" y={18}>
-            <nav aria-label="Konum" className="flex flex-wrap items-center gap-2 text-[13px] text-sand-400">
+            <nav
+              aria-label="Konum"
+              className="flex flex-wrap items-center gap-2 text-[13px] text-sand-400"
+            >
               <Link href="/projelerimiz" className="transition-colors hover:text-white">
                 Projelerimiz
               </Link>
@@ -72,24 +74,10 @@ export default async function ProjectDetailPage({
               <span className="text-sand-200">{area?.name}</span>
             </nav>
 
-            <div className="mt-6 flex flex-wrap gap-2">
-              <span className="rounded-full bg-white/15 px-3.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur">
-                {statusLabels[project.status]}
-              </span>
-              {project.location && (
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur">
-                  <PinIcon className="h-3.5 w-3.5" /> {project.location}
-                </span>
-              )}
-              <span className="rounded-full bg-white/15 px-3.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur">
-                <time dateTime={project.date}>{formatDate(project.date)}</time>
-              </span>
-            </div>
-
-            <h1 className="mt-6 text-[36px] leading-[1.06] tracking-[-0.03em] text-white sm:text-[52px]">
+            <h1 className="mt-5 text-[30px] leading-[1.06] tracking-[-0.03em] text-white sm:text-[46px] lg:text-[52px]">
               {project.title}
             </h1>
-            <p className="mt-6 max-w-2xl text-[17px] leading-[1.8] text-sand-200/90">
+            <p className="mt-5 max-w-2xl text-[16px] leading-[1.8] text-sand-200/90 sm:text-[17px]">
               {project.summary}
             </p>
           </Reveal>
@@ -133,53 +121,21 @@ export default async function ProjectDetailPage({
           {/* Yan panel */}
           <aside className="lg:col-span-4">
             <Reveal delay={0.1}>
-              <div className="sticky top-32 space-y-4">
+              <div className="sticky top-28 space-y-4">
                 <div className="rounded-3xl border border-sand-200 bg-white p-7 shadow-card">
                   <h2 className="font-display text-[17px] font-bold text-ink-950">
-                    Proje bilgileri
+                    Çalışma alanı
                   </h2>
-                  <dl className="mt-5 space-y-4 text-[14.5px]">
-                    <div>
-                      <dt className="text-[12.5px] font-semibold text-ink-400">Çalışma alanı</dt>
-                      <dd className="mt-1 flex items-center gap-2 text-ink-900">
-                        {AreaIcon && <AreaIcon className="h-4.5 w-4.5 text-clay-600" />}
-                        {area?.name}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-[12.5px] font-semibold text-ink-400">Durum</dt>
-                      <dd className="mt-1 text-ink-900">{statusLabels[project.status]}</dd>
-                    </div>
-                    {project.location && (
-                      <div>
-                        <dt className="text-[12.5px] font-semibold text-ink-400">Yer</dt>
-                        <dd className="mt-1 text-ink-900">{project.location}</dd>
-                      </div>
-                    )}
-                    <div>
-                      <dt className="text-[12.5px] font-semibold text-ink-400">Tarih</dt>
-                      <dd className="mt-1 text-ink-900">
-                        <time dateTime={project.date}>{formatDate(project.date)}</time>
-                      </dd>
-                    </div>
-                  </dl>
+                  <p className="mt-4 flex items-center gap-2 text-[15px] text-ink-900">
+                    {AreaIcon && <AreaIcon className="h-4.5 w-4.5 text-clay-600" />}
+                    {area?.name}
+                  </p>
+                  {area && (
+                    <p className="mt-3 text-[14px] leading-[1.7] text-ink-500">
+                      {area.description}
+                    </p>
+                  )}
                 </div>
-
-                {project.highlights && project.highlights.length > 0 && (
-                  <div className="rounded-3xl border border-sand-200 bg-sand-100 p-7">
-                    <h2 className="font-display text-[17px] font-bold text-ink-950">
-                      Projede neler var?
-                    </h2>
-                    <ul className="mt-5 space-y-3">
-                      {project.highlights.map((item) => (
-                        <li key={item} className="flex gap-3 text-[14.5px] leading-[1.7] text-ink-600">
-                          <CheckIcon className="mt-0.5 h-4.5 w-4.5 shrink-0 text-clay-600" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
 
                 <div className="rounded-3xl bg-ink-950 p-7 text-sand-200">
                   <h2 className="font-display text-[17px] font-bold text-white">

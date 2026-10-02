@@ -19,7 +19,7 @@ export default function KvkkPage() {
           heading: "Veri sorumlusu",
           paragraphs: [
             `Kişisel verileriniz, veri sorumlusu olarak ${site.legalName} tarafından aşağıda açıklanan kapsamda işlenmektedir.`,
-            `Adres: ${site.address} · E-posta: ${site.email}`,
+            `E-posta: ${site.email}`,
           ],
         },
         {
