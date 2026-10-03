@@ -38,7 +38,7 @@ export default async function ProjectsPage({
         </Button>
       </PageHero>
 
-      <section className="container-x py-14 lg:py-18">
+      <section className="container-x py-10 lg:py-12">
         {all.length > 0 ? (
           <ProjectFilter projects={all} initialArea={initialArea} />
         ) : (

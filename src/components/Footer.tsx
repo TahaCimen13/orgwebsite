@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 import { LogoMark } from "./Logo";
 import { Button } from "./Button";
 import { Reveal } from "./Reveal";
-import { ArrowIcon, MailIcon, ClockIcon, ShieldIcon } from "./Icons";
+import { ArrowIcon, MailIcon, ShieldIcon } from "./Icons";
 
 const columns = [
   {
@@ -138,10 +138,6 @@ export function Footer() {
                 <a href={`mailto:${site.email}`} className="hover:text-white">
                   {site.email}
                 </a>
-              </li>
-              <li className="flex gap-3">
-                <ClockIcon className="mt-0.5 h-4.5 w-4.5 shrink-0 text-clay-400" />
-                <span>{site.workingHours}</span>
               </li>
             </ul>
           </div>

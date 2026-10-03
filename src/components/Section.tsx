@@ -46,27 +46,27 @@ export function PageHero({
   description?: string;
   image?: string;
   /**
-   * Mobilde giriş bölümünü küçültür: etiket, açıklama ve düğmeler gizlenir,
-   * yalnızca küçültülmüş başlık kalır. Masaüstünde hiçbir şey değişmez.
-   * Ana sayfa ve Hakkımızda dışındaki sayfalarda kullanılır.
+   * Giriş bölümünü ince bir şeride indirir: etiket, açıklama ve düğmeler
+   * gizlenir, yalnızca küçültülmüş başlık kalır. Böylece sayfanın asıl
+   * içeriği hemen görünür. Ana sayfa ve Hakkımızda dışında kullanılır.
    */
   compact?: boolean;
   children?: ReactNode;
 }) {
-  const hideOnMobile = compact ? "max-sm:hidden" : "";
+  const hide = compact ? "hidden" : "";
 
   if (image) {
     return (
       <section className="relative isolate overflow-hidden">
         <Photo src={image} alt="" fill priority sizes="100vw" className="-z-10 object-cover" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950/92 via-ink-950/78 to-ink-950/40" />
-        <div className={`container-x ${compact ? "py-9 sm:py-24 lg:py-28" : "py-20 sm:py-28"}`}>
+        <div className={`container-x ${compact ? "py-9 sm:py-11 lg:py-12" : "py-20 sm:py-28"}`}>
           <Reveal className="max-w-3xl" y={18}>
-            {eyebrow && <span className={`eyebrow-light ${hideOnMobile}`}>{eyebrow}</span>}
+            {eyebrow && <span className={`eyebrow-light ${hide}`}>{eyebrow}</span>}
             <h1
               className={`leading-[1.06] tracking-[-0.03em] text-white ${
                 compact
-                  ? "text-[26px] sm:mt-6 sm:text-[48px] lg:text-[56px]"
+                  ? "text-[26px] sm:text-[32px] lg:text-[34px]"
                   : "mt-6 text-[40px] sm:text-[56px]"
               }`}
             >
@@ -74,12 +74,12 @@ export function PageHero({
             </h1>
             {description && (
               <p
-                className={`mt-6 max-w-2xl text-[17px] leading-[1.8] text-sand-200/90 ${hideOnMobile}`}
+                className={`mt-6 max-w-2xl text-[17px] leading-[1.8] text-sand-200/90 ${hide}`}
               >
                 {description}
               </p>
             )}
-            {children && <div className={`mt-9 ${hideOnMobile}`}>{children}</div>}
+            {children && <div className={`mt-9 ${hide}`}>{children}</div>}
           </Reveal>
         </div>
       </section>
@@ -96,24 +96,24 @@ export function PageHero({
         className="pointer-events-none absolute -bottom-40 left-1/3 h-80 w-80 rounded-full bg-olive-100/50 blur-3xl"
         aria-hidden="true"
       />
-      <div className={`container-x relative ${compact ? "py-8 sm:py-18 lg:py-22" : "py-16 sm:py-22"}`}>
+      <div className={`container-x relative ${compact ? "py-8 sm:py-10 lg:py-11" : "py-16 sm:py-22"}`}>
         <Reveal className="max-w-3xl" y={18}>
-          {eyebrow && <span className={`eyebrow ${hideOnMobile}`}>{eyebrow}</span>}
+          {eyebrow && <span className={`eyebrow ${hide}`}>{eyebrow}</span>}
           <h1
             className={`leading-[1.08] tracking-[-0.03em] ${
               compact
-                ? "text-[26px] sm:mt-6 sm:text-[44px] lg:text-[52px]"
+                ? "text-[26px] sm:text-[32px] lg:text-[34px]"
                 : "mt-6 text-[38px] sm:text-[52px]"
             }`}
           >
             {title}
           </h1>
           {description && (
-            <p className={`mt-6 max-w-2xl text-[17px] leading-[1.8] text-ink-500 ${hideOnMobile}`}>
+            <p className={`mt-6 max-w-2xl text-[17px] leading-[1.8] text-ink-500 ${hide}`}>
               {description}
             </p>
           )}
-          {children && <div className={`mt-9 ${hideOnMobile}`}>{children}</div>}
+          {children && <div className={`mt-9 ${hide}`}>{children}</div>}
         </Reveal>
       </div>
     </section>

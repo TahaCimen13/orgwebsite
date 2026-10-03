@@ -150,6 +150,13 @@ export const ChevronDownIcon = (p: P) => (
   </svg>
 );
 
+export const SearchIcon = (p: P) => (
+  <svg {...base} {...p}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="m16 16 4 4" />
+  </svg>
+);
+
 export const iconMap = {
   book: BookIcon,
   pill: PillIcon,

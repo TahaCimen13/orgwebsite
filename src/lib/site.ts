@@ -15,7 +15,6 @@ export const site = {
   url: "https://example.org.tr",
   domain: "example.org.tr",
   email: "[bilgi@dernekadresi.org]",
-  workingHours: "Hafta içi 09.00 – 18.00",
   founded: 2026,
   /** Kurucu bilgisi — Hakkımızda > Tarihçe bölümünde kullanılır. */
   founder: "Asya Akbulut",

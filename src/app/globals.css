@@ -90,6 +90,13 @@
   border-radius: 6px;
 }
 
+/* Odak halkasını saran kutunun kendisi gösteriyorsa (ör. arama hapı),
+   iç alanda ikinci bir halka çizilmesin. Genel kural katmansız olduğu
+   için istisnanın da katmansız ve daha belirgin olması gerekir. */
+.focus-ring-inherit:focus-visible {
+  outline: none;
+}
+
 @utility container-x {
   margin-inline: auto;
   width: 100%;
