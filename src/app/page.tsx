@@ -7,7 +7,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ContactForm } from "@/components/ContactForm";
 import { Button } from "@/components/Button";
 import { areas } from "@/data/areas";
-import { featuredProjects, projectCountByArea } from "@/data/projects";
+import { alanBazindaSayi, oneCikanProjeler } from "@/lib/projeler";
 import { mission, site, vision } from "@/lib/site";
 import {
   ArrowIcon,
@@ -60,8 +60,9 @@ const values = [
   },
 ];
 
-export default function HomePage() {
-  const featured = featuredProjects().slice(0, 6);
+export default async function HomePage() {
+  const featured = (await oneCikanProjeler()).slice(0, 6);
+  const projeSayilari = await alanBazindaSayi();
 
   return (
     <>
@@ -136,7 +137,7 @@ export default function HomePage() {
           <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {areas.map((area) => {
               const Icon = iconMap[area.icon];
-              const count = projectCountByArea(area.slug);
+              const count = projeSayilari[area.slug] ?? 0;
               return (
                 <StaggerItem key={area.slug}>
                   <Link

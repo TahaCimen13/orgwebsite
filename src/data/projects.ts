@@ -1,22 +1,14 @@
 import type { AreaSlug } from "./areas";
 
 /**
- * PROJELER
- * ─────────────────────────────────────────────────────────────
- * Aşağıdaki kayıtlar ÖRNEKTİR. Kendi projelerinizi eklerken:
- *   1. Fotoğrafları `public/images/` içine koyun (ör. kitap-atolyesi.jpg)
- *   2. `image` alanına kapak fotoğrafını, `gallery` alanına diğerlerini yazın
- *   3. `body` içindeki her satır ayrı bir paragraf olarak basılır
+ * PROJE TİPİ
  *
- * Projeler bu dosyadaki sıraya göre listelenir; en üstteki en başta görünür.
- *
- * Dernek bağış toplamadığı için bu dosyada tutar, hedef, bağış veya
- * IBAN gibi para ile ilgili HİÇBİR alan bulunmaz.
- *
- * Dosyanın sonunda kopyalayıp doldurabileceğiniz boş bir şablon var.
+ * Projeler artık Supabase'de tutuluyor ve /admin panelinden yönetiliyor.
+ * Bu dosya yalnızca tip tanımını ve yeni bir kurulumu doldurmak için
+ * kullanılan başlangıç verisini içerir (bkz. scripts/seed.ts).
  */
-
 export type Project = {
+  id?: string;
   /** URL'de görünen ad — küçük harf, Türkçe karakter yok, boşluk yerine tire */
   slug: string;
   title: string;
@@ -25,15 +17,51 @@ export type Project = {
   summary: string;
   /** Detay sayfasındaki anlatım — her madde bir paragraf */
   body: string[];
-  /** Kapak fotoğrafı — public/images/ içindeki yol */
-  image: string;
-  /** Detay sayfasındaki galeri fotoğrafları */
-  gallery?: string[];
+  /** Kapak görseli (Supabase Storage veya /images/... yolu) */
+  image: string | null;
+  /** Detay sayfasındaki galeri görselleri */
+  gallery: string[];
   /** Ana sayfada öne çıkarılsın mı */
-  featured?: boolean;
+  featured: boolean;
+  /** Küçük sayı önce listelenir */
+  position: number;
 };
 
-export const projects: Project[] = [
+/** Veritabanından gelen satırı uygulama tipine çevirir. */
+export type ProjectRow = {
+  id: string;
+  slug: string;
+  title: string;
+  area: string;
+  summary: string;
+  body: string[] | null;
+  image: string | null;
+  gallery: string[] | null;
+  featured: boolean;
+  position: number;
+};
+
+export function rowToProject(row: ProjectRow): Project {
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    area: row.area as AreaSlug,
+    summary: row.summary,
+    body: row.body ?? [],
+    image: row.image,
+    gallery: row.gallery ?? [],
+    featured: row.featured,
+    position: row.position,
+  };
+}
+
+/**
+ * Boş bir veritabanını doldurmak için başlangıç verisi.
+ * `npm run seed` bunları bir kez yükler. Kendi projelerinizi
+ * ekledikten sonra bu listeyi boşaltabilirsiniz.
+ */
+export const baslangicProjeleri: Omit<Project, "id">[] = [
   {
     slug: "okul-cantamda-bir-kitap",
     title: "Okul Çantamda Bir Kitap",
@@ -41,6 +69,7 @@ export const projects: Project[] = [
     image: "/images/kirtasiye.jpg",
     gallery: ["/images/egitim.jpg", "/images/sinif.jpg"],
     featured: true,
+    position: 0,
     summary:
       "Okuma kültürünü yaygınlaştırmak ve kitaba erişimi kolaylaştırmak için öğrencilerin kendi aralarında kurduğu bir kitap paylaşım ağı.",
     body: [
@@ -56,6 +85,7 @@ export const projects: Project[] = [
     image: "/images/sinif.jpg",
     gallery: ["/images/egitim.jpg"],
     featured: true,
+    position: 1,
     summary:
       "Derslerinde desteğe ihtiyaç duyan öğrencilerle, o konuda güçlü olan yaşıtlarını bir araya getiren düzenli çalışma buluşmaları.",
     body: [
@@ -71,6 +101,7 @@ export const projects: Project[] = [
     image: "/images/hakkimizda.jpg",
     gallery: ["/images/sosyal.jpg"],
     featured: true,
+    position: 2,
     summary:
       "Gençlerin kendi çevrelerinde gördükleri sorunları görünür kıldığı söyleşi ve atölye dizisi.",
     body: [
@@ -80,28 +111,3 @@ export const projects: Project[] = [
     ],
   },
 ];
-
-export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);
-
-export const featuredProjects = () => projects.filter((p) => p.featured);
-
-export const projectCountByArea = (area: string) =>
-  projects.filter((p) => p.area === area).length;
-
-/* ─────────────────────────────────────────────────────────────
-   YENİ PROJE ŞABLONU — kopyalayıp yukarıdaki listeye ekleyin:
-
-  {
-    slug: "proje-adi",
-    title: "Proje Adı",
-    area: "egitim-firsat",            // areas.ts içindeki alanlardan biri
-    image: "/images/kapak.jpg",
-    gallery: ["/images/foto-1.jpg", "/images/foto-2.jpg"],
-    featured: true,                   // ana sayfada görünsün mü
-    summary: "Kartta görünecek kısa özet.",
-    body: [
-      "Birinci paragraf.",
-      "İkinci paragraf.",
-    ],
-  },
-   ───────────────────────────────────────────────────────────── */

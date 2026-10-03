@@ -5,13 +5,9 @@ import { Photo } from "@/components/Photo";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/Button";
 import { ProjectCard } from "@/components/ProjectCard";
-import { projects, projectBySlug } from "@/data/projects";
+import { projeGetir, projeleriGetir } from "@/lib/projeler";
 import { areaBySlug } from "@/data/areas";
 import { ArrowIcon, iconMap } from "@/components/Icons";
-
-export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
-}
 
 export async function generateMetadata({
   params,
@@ -19,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = projectBySlug(slug);
+  const project = await projeGetir(slug);
   if (!project) return { title: "Proje bulunamadı" };
 
   return {
@@ -28,7 +24,7 @@ export async function generateMetadata({
     openGraph: {
       title: project.title,
       description: project.summary,
-      images: [{ url: project.image }],
+      ...(project.image ? { images: [{ url: project.image }] } : {}),
     },
   };
 }
@@ -39,12 +35,12 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = projectBySlug(slug);
+  const project = await projeGetir(slug);
   if (!project) notFound();
 
   const area = areaBySlug(project.area);
   const AreaIcon = area ? iconMap[area.icon] : null;
-  const related = projects
+  const related = (await projeleriGetir())
     .filter((p) => p.slug !== project.slug && p.area === project.area)
     .slice(0, 3);
 
@@ -52,14 +48,16 @@ export default async function ProjectDetailPage({
     <>
       {/* Başlık */}
       <section className="relative isolate overflow-hidden bg-ink-950">
-        <Photo
-          src={project.image}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="-z-10 object-cover"
-        />
+        {project.image && (
+          <Photo
+            src={project.image}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="-z-10 object-cover"
+          />
+        )}
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950/94 via-ink-950/80 to-ink-950/45" />
         <div className="container-x py-12 sm:py-20 lg:py-24">
           <Reveal className="max-w-3xl" y={18}>

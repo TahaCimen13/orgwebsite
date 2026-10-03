@@ -10,13 +10,17 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-sand-200 bg-white shadow-card transition-all duration-500 hover:-translate-y-1.5 hover:border-clay-200 hover:shadow-lift">
       <div className="relative h-48 overflow-hidden">
-        <Photo
-          src={project.image}
-          alt=""
-          fill
-          sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
+        {project.image ? (
+          <Photo
+            src={project.image}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-sand-200 to-clay-100" />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950/50 via-transparent to-transparent" />
         <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-[11.5px] font-semibold text-ink-800 backdrop-blur">
           {area?.name}

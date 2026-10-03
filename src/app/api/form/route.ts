@@ -1,10 +1,8 @@
+import { mesajKaydet } from "@/lib/mesajlar";
+
 /**
  * Form gönderim uç noktası.
- *
- * Şu anda gelen başvurular doğrulanır ve sunucu günlüğüne yazılır.
- * Başvuruları e-posta olarak almak isterseniz aşağıdaki `deliver`
- * fonksiyonunun içini bir e-posta servisiyle doldurmanız yeterli;
- * formun ön yüzünü değiştirmeniz gerekmez.
+ * Gelen mesajlar Supabase'e kaydedilir ve /admin/mesajlar altında görünür.
  */
 
 type Payload = {
@@ -25,18 +23,6 @@ const messages: Record<string, string> = {
 
 const isEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-/** Başvuruyu kalıcı bir yere iletir. Şimdilik yalnızca günlüğe yazar. */
-async function deliver(data: Payload) {
-  console.log("[form]", {
-    formType: data.formType,
-    name: data.name,
-    email: data.email,
-    phone: data.phone,
-    subject: data.subject,
-    receivedAt: new Date().toISOString(),
-  });
-}
-
 export async function POST(request: Request) {
   let data: Payload;
 
@@ -50,6 +36,8 @@ export async function POST(request: Request) {
   const email = data.email?.trim() ?? "";
   const phone = data.phone?.trim() ?? "";
   const message = data.message?.trim() ?? "";
+  const subject = data.subject?.trim() ?? "";
+  const formType = data.formType === "volunteer" ? "volunteer" : "contact";
 
   if (name.length < 2) {
     return Response.json({ ok: false, error: "Lütfen adınızı ve soyadınızı girin." }, { status: 400 });
@@ -81,17 +69,25 @@ export async function POST(request: Request) {
     );
   }
 
+  // Aşırı uzun girdileri kırp — veritabanını şişirmesin
+  const kirp = (v: string, n: number) => v.slice(0, n);
+
   try {
-    await deliver(data);
-  } catch {
+    await mesajKaydet({
+      form_type: formType,
+      name: kirp(name, 120),
+      email: email ? kirp(email, 160) : null,
+      phone: phone ? kirp(phone, 40) : null,
+      subject: subject ? kirp(subject, 120) : null,
+      message: kirp(message, 5000),
+    });
+  } catch (err) {
+    console.error("[form] mesaj kaydedilemedi:", err);
     return Response.json(
       { ok: false, error: "Şu anda gönderemedik. Lütfen daha sonra tekrar deneyin." },
       { status: 500 }
     );
   }
 
-  return Response.json({
-    ok: true,
-    message: messages[data.formType ?? "contact"] ?? messages.contact,
-  });
+  return Response.json({ ok: true, message: messages[formType] });
 }

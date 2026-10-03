@@ -3,7 +3,7 @@ import { PageHero } from "@/components/Section";
 import { ProjectFilter } from "@/components/ProjectFilter";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/Button";
-import { projects } from "@/data/projects";
+import { projeleriGetir } from "@/lib/projeler";
 import { areaBySlug } from "@/data/areas";
 import { ArrowIcon } from "@/components/Icons";
 
@@ -23,7 +23,7 @@ export default async function ProjectsPage({
   // Geçersiz bir alan adı gelirse sessizce "tümü"ne düşeriz.
   const initialArea = raw && areaBySlug(raw) ? raw : "tumu";
 
-  const all = projects;
+  const all = await projeleriGetir();
 
   return (
     <>
