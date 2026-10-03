@@ -1,4 +1,6 @@
+import { redirect } from "next/navigation";
 import { GirisFormu } from "./GirisFormu";
+import { oturumAcikMi } from "@/lib/admin-auth";
 
 export default async function GirisPage({
   searchParams,
@@ -6,6 +8,9 @@ export default async function GirisPage({
   searchParams: Promise<{ devam?: string }>;
 }) {
   const { devam } = await searchParams;
+
+  // Zaten girişliyse formu gösterme
+  if (await oturumAcikMi()) redirect("/admin");
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-sand-100 px-5">

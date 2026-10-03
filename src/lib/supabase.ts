@@ -19,23 +19,41 @@ function required(name: string): string {
       `${name} tanımlı değil. .env.local dosyasını .env.local.example örneğine göre doldurun.`
     );
   }
-  return value;
+  return value.trim();
+}
+
+/**
+ * Proje adresinin kökü.
+ *
+ * Supabase panelinde "RESTful endpoint" alanı
+ * `https://xxx.supabase.co/rest/v1/` biçiminde gösterilir ve kolayca
+ * yanlışlıkla kopyalanır. İstemci ise yalnızca kökü ister; yol eklenirse
+ * her istek "Invalid path specified in request URL" ile döner.
+ * Bu yüzden ne yapıştırılırsa yapıştırılsın kökü alıyoruz.
+ */
+function projeAdresi(): string {
+  const ham = required("NEXT_PUBLIC_SUPABASE_URL");
+  try {
+    return new URL(ham).origin;
+  } catch {
+    throw new Error(
+      "NEXT_PUBLIC_SUPABASE_URL geçerli bir adres değil. Örnek: https://abcdefgh.supabase.co"
+    );
+  }
 }
 
 /** Sunucu tarafı istemci — tüm yönetim işlemleri bunu kullanır. */
 export function supabaseAdmin() {
-  return createClient(required("NEXT_PUBLIC_SUPABASE_URL"), required("SUPABASE_SERVICE_ROLE_KEY"), {
+  return createClient(projeAdresi(), required("SUPABASE_SERVICE_ROLE_KEY"), {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }
 
 /** Herkese açık okuma istemcisi — yalnızca RLS'in izin verdiğini görür. */
 export function supabasePublic() {
-  return createClient(
-    required("NEXT_PUBLIC_SUPABASE_URL"),
-    required("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
-    { auth: { persistSession: false, autoRefreshToken: false } }
-  );
+  return createClient(projeAdresi(), required("NEXT_PUBLIC_SUPABASE_ANON_KEY"), {
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
 }
 
 /** Ortam değişkenleri hazır mı? Kurulum tamamlanmadan siteyi çökertmemek için. */

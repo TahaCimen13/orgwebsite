@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { MobileBar } from "@/components/MobileBar";
-import { CookieBanner } from "@/components/CookieBanner";
-import { ScrollProgress } from "@/components/Reveal";
 import { site } from "@/lib/site";
 import { siteUrl } from "@/lib/url";
+
+/**
+ * Kök düzen — yalnızca belge iskeleti.
+ *
+ * Sitenin menüsü, alt bilgisi ve çerez bandı (site) grubunun
+ * düzenindedir; böylece /admin altındaki sayfalarda görünmez.
+ */
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -66,37 +68,7 @@ export default function RootLayout({
           <style>{`[style*="opacity:0"]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
       </head>
-      <body className="min-h-screen antialiased">
-        <a
-          href="#icerik"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-[100] focus:bg-ink-950 focus:px-5 focus:py-3 focus:text-sand-50"
-        >
-          İçeriğe geç
-        </a>
-        <ScrollProgress />
-        <Header />
-        <main id="icerik">{children}</main>
-        <Footer />
-        <MobileBar />
-        <CookieBanner />
-        <div className="h-19 lg:hidden" aria-hidden="true" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "NGO",
-              name: site.legalName,
-              alternateName: site.name,
-              url,
-              email: site.email,
-              address: { "@type": "PostalAddress", addressCountry: "TR" },
-              foundingDate: String(site.founded),
-              description: site.description,
-            }),
-          }}
-        />
-      </body>
+      <body className="min-h-screen antialiased">{children}</body>
     </html>
   );
 }
