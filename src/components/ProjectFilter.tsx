@@ -183,12 +183,8 @@ export function ProjectFilter({
         </div>
       </div>
 
-      <p className="mt-6 text-[13.5px] text-ink-400">
-        <strong className="font-semibold text-ink-900">{filtered.length}</strong> proje listeleniyor
-      </p>
-
       {filtered.length > 0 ? (
-        <motion.div layout className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((p) => (
               <motion.div
@@ -205,7 +201,7 @@ export function ProjectFilter({
           </AnimatePresence>
         </motion.div>
       ) : (
-        <div className="mt-5 rounded-3xl border border-dashed border-sand-300 bg-sand-50 p-16 text-center">
+        <div className="mt-8 rounded-3xl border border-dashed border-sand-300 bg-sand-50 p-16 text-center">
           <p className="font-display text-[22px] font-bold text-ink-950">Sonuç bulunamadı</p>
           <p className="mt-3 text-[14px] leading-relaxed text-ink-600">
             Farklı bir çalışma alanı seçmeyi veya aramanızı sadeleştirmeyi deneyin.
